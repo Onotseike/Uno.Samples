@@ -11,13 +11,23 @@
   <Import Project="UnoOnnxSamples.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
+    <UpToDateCheckInput Remove="Views\PageFour.xaml" />
     <UpToDateCheckInput Remove="Views\PageOne.xaml" />
+    <UpToDateCheckInput Remove="Views\PageThree.xaml" />
+    <UpToDateCheckInput Remove="Views\PageTwo.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Compile Remove="Extensions\ImageResourceExtension.cs" />
     <_Globbed_Compile Remove="Models\MobileOnnxImgaeClassifier.cs" />
+    <_Globbed_Compile Remove="Views\PageFour.xaml.cs" />
     <_Globbed_Compile Remove="Views\PageOne.xaml.cs" />
+    <_Globbed_Compile Remove="Views\PageThree.xaml.cs" />
+    <_Globbed_Compile Remove="Views\PageTwo.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbled_Page Remove="Views\PageFour.xaml" />
     <_Globbled_Page Remove="Views\PageOne.xaml" />
+    <_Globbled_Page Remove="Views\PageThree.xaml" />
+    <_Globbled_Page Remove="Views\PageTwo.xaml" />
   </ItemGroup>
 </Project>

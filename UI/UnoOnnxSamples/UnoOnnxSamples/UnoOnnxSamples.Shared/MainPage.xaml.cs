@@ -27,6 +27,32 @@ namespace UnoOnnxSamples
         public MainPage()
         {
             this.InitializeComponent();
+            contentFrame.Navigate(typeof(Views.PageOne));
+        }
+
+        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            var selectedItem = (NavigationViewItem)args.SelectedItem;
+            var selectedTag = (string)selectedItem.Tag;
+            switch (selectedTag)
+            {
+                case "PageOne":
+                    contentFrame.Navigate(typeof(Views.PageOne));
+                    break;
+                case "PageTwo":
+                    contentFrame.Navigate(typeof(Views.PageTwo));
+                    break;
+                case "PageThree":
+                    contentFrame.Navigate(typeof(Views.PageThree));
+                    break;
+                case "PageFour":
+                    contentFrame.Navigate(typeof(Views.PageFour));
+                    break;
+
+                default:
+                    contentFrame.Navigate(typeof(Views.PageOne));
+                    break;
+            }
         }
     }
 }

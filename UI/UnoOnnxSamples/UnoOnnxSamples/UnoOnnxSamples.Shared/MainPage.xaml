@@ -10,19 +10,24 @@
 	Padding="0,50"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-	<TabView IsAddTabButtonVisible="False"
-			 CloseButtonOverlayMode="OnPointerOver">
-		<TabView.TabItems>
-			<TabViewItem Header="Tab 1">
-				<views:PageOne />
-			</TabViewItem>
-
-			<TabViewItem Header="Tab 2" />
-
-			<TabViewItem Header="Tab 3" />
-
-			<TabViewItem Header="Tab 4" />
-
-		</TabView.TabItems>
-	</TabView>
+	<NavigationView PaneDisplayMode="Top"
+					IsSettingsVisible="False"
+					IsBackButtonVisible="Collapsed"				
+					SelectionChanged="NavigationView_SelectionChanged">
+		<NavigationView.MenuItems>
+			<NavigationViewItem Content="Onnx"
+								Icon="NewFolder"
+								Tag="PageOne" />
+			<NavigationViewItem Content="PyTorch"
+								Icon="Document"
+								Tag="PageTwo" />
+			<NavigationViewItem Content="Keras"
+								Icon="Library"
+								Tag="PageThree" />
+			<NavigationViewItem Content="ML.NET"
+								Icon="Link"
+								Tag="PageFour" />
+		</NavigationView.MenuItems>
+		<Frame x:Name="contentFrame"/>
+	</NavigationView>
 </Page>

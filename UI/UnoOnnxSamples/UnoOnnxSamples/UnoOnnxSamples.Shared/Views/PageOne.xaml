@@ -9,10 +9,34 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4*"/>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4*" />
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<Image x:Name="PreloadedImage1"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+			   Source="ms-appx:///Content/Onnx/dog.jpg"/>
 		<Button x:Name="RunButton"
-				Content="Run"
+				Grid.Row="1"
+				Content="Predict Image Above"
 				HorizontalAlignment="Stretch"
 				VerticalAlignment="Center"
 				Click="RunButton_Click"/>
+
+		<Image x:Name="PreLoadImage2"
+			   Grid.Row="2"
+			   HorizontalAlignment="Center"
+			   VerticalAlignment="Center"
+			   Source="ms-appx:///Content/Onnx/chicken.jpg" />
+		<Button x:Name="LoadButton" 
+				Grid.Row="3"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Center"
+				Content="Predict Image Above"
+				Click="LoadButton_Click"/>
 	</Grid>
 </Page>

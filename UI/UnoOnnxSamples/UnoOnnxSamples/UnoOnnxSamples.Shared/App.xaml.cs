@@ -23,6 +23,7 @@ namespace UnoOnnxSamples
         /// </summary>
         public App()
         {
+
             InitializeLogging();
 
             this.InitializeComponent();

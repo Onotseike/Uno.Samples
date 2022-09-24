@@ -22,8 +22,17 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\MobileOnnxImgaeClassifier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PageFour.xaml.cs">
+      <DependentUpon>PageFour.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\PageOne.xaml.cs">
       <DependentUpon>PageOne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PageThree.xaml.cs">
+      <DependentUpon>PageThree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PageTwo.xaml.cs">
+      <DependentUpon>PageTwo.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -31,15 +40,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\PageFour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\PageOne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\PageThree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\PageTwo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Onnx\mobilenetv2-7-quantized.onnx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Onnx\mobilenetv2-7.onnx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\mobilenetv2-7-quantized.onnx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\mobilenetv2-7.onnx" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
@@ -50,8 +71,15 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Onnx\dog.jpg" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Onnx\imagenet_classes.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Onnx\chicken.jpg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\chickenn.jpg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\dogg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="$(MSBuildThisFileDirectory)Content\Onnx\dog.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\imagenet_classes.txt" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,5 +99,8 @@
     <ApplicationDefinition Update="$(MSBuildThisFileDirectory)**/*.xaml" XamlRuntime="WinUI" />
     <!-- Make sure XAML files force reevaluation of up-to-date checks -->
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
 </Project>

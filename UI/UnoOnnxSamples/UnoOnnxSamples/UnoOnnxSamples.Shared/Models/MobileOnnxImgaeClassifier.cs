@@ -43,15 +43,23 @@ namespace UnoOnnxSamples.Models
 
         #region Method(s)
 
-        public async Task<byte[]> GetSampleImageAsync()
+        public async Task<byte[]> GetSampleImageAsync(string filename)
         {
-            await InitAsync().ConfigureAwait(false);
+            await InitAsync(filename).ConfigureAwait(false);
+            var assembly = GetType().Assembly;
+            // Get sample image
+            var imageResource = EmbeddedResources.First(item => item.EndsWith(filename));
+            using var sampleImageStream = assembly.GetManifestResourceStream(imageResource);
+            using var sampleImageMemoryStream = new MemoryStream();
+
+            sampleImageStream.CopyTo(sampleImageMemoryStream);
+            _sampleImage = sampleImageMemoryStream.ToArray();
             return _sampleImage;
         }
 
-        public async Task<string> GetClassificationAsync(byte[] image)
+        public async Task<string> GetClassificationAsync(byte[] image, string filename)
         {
-            await InitAsync().ConfigureAwait(false);
+            await InitAsync(filename).ConfigureAwait(false);
             using var sourceBitmap = SKBitmap.Decode(image);
             var pixels = sourceBitmap.Bytes;
 
@@ -158,15 +166,15 @@ namespace UnoOnnxSamples.Models
             return label;
         }
 
-        Task InitAsync()
+        Task InitAsync(string filename="dogg.jpg")
         {
             if (_initTask == null || _initTask.IsFaulted)
-                _initTask = InitTask();
+                _initTask = InitTask(filename);
 
             return _initTask;
         }
 
-        async Task InitTask()
+        async Task InitTask(string filename)
         {
             var assembly = GetType().Assembly;
 
@@ -193,7 +201,7 @@ namespace UnoOnnxSamples.Models
             _session = new InferenceSession(_model);
 
             // Get sample image
-            var imageResource = EmbeddedResources.First(item => item.EndsWith(".dog.jpg"));
+            var imageResource = EmbeddedResources.First(item => item.EndsWith(filename));
             using var sampleImageStream = assembly.GetManifestResourceStream(imageResource);
             using var sampleImageMemoryStream = new MemoryStream();
 
