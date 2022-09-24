@@ -36,6 +36,8 @@
     <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.12.1" />
+    <PackageReference Include="SkiaSharp" Version="2.88.2" />
     <PackageReference Include="Uno.WinUI" Version="4.5.9" />
     <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.5.9" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.9" />
