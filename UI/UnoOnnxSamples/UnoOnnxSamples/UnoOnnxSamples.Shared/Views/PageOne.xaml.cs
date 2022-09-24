@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
+using Microsoft.UI.Xaml.Controls;
+using UnoOnnxSamples.Models;
+using System.Threading.Tasks;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace UnoOnnxSamples.Views
@@ -23,9 +11,44 @@ namespace UnoOnnxSamples.Views
     /// </summary>
     public sealed partial class PageOne : Page
     {
+        MobileOnnxImgaeClassifier _classifier;
+        public string[] EmbeddedResources { get; } = typeof(MainPage).Assembly.GetManifestResourceNames();
         public PageOne()
         {
             this.InitializeComponent();
+            this._classifier = new MobileOnnxImgaeClassifier();
+            foreach (var item in EmbeddedResources)
+            {
+                Console.WriteLine(item);
+            }
         }
+
+        async Task RunInferenceAsync()
+        {
+            RunButton.IsEnabled = false;
+            try
+            {
+                var sampleImage = await _classifier.GetSampleImageAsync();
+                var result = await _classifier.GetClassificationAsync(sampleImage);
+
+                var dialog = new ContentDialog();
+                dialog.Content = result;
+                dialog.CloseButtonText = "Done";
+
+                var dialogResult = await dialog.ShowAsync();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                RunButton.IsEnabled = true;
+            }
+        }
+
+        private async void RunButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => await RunInferenceAsync();
     }
 }
