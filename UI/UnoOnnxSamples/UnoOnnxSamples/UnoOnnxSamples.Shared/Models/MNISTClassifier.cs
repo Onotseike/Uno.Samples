@@ -75,34 +75,20 @@ namespace UnoOnnxSamples.Models
             await InitAsync().ConfigureAwait(false);
             using var sourceBitmap = SKBitmap.Decode(image);
             var pixels = sourceBitmap.Bytes;
+            var bytesPerPixel = sourceBitmap.BytesPerPixel;
 
             // Rescale.
             if (sourceBitmap.Width != ImageSizeX || sourceBitmap.Height != ImageSizeY)
             {
                 float ratio = (float)Math.Min(ImageSizeX, ImageSizeY) / Math.Min(sourceBitmap.Width, sourceBitmap.Height);
 
-                using SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(
-                    (int)(ratio * sourceBitmap.Width),
-                    (int)(ratio * sourceBitmap.Height)),
-                    SKFilterQuality.Medium);
-
-                var horizontalCrop = scaledBitmap.Width - ImageSizeX;
-                var verticalCrop = scaledBitmap.Height - ImageSizeY;
-                var leftOffset = horizontalCrop == 0 ? 0 : horizontalCrop / 2;
-                var topOffset = verticalCrop == 0 ? 0 : verticalCrop / 2;
-
-                var cropRect = SKRectI.Create(
-                    new SKPointI(leftOffset, topOffset),
-                    new SKSizeI(ImageSizeX, ImageSizeY));
-
-                using SKImage currentImage = SKImage.FromBitmap(scaledBitmap);
-                using SKImage croppedImage = currentImage.Subset(cropRect);
-                using SKBitmap croppedBitmap = SKBitmap.FromImage(croppedImage);
-
-                pixels = croppedBitmap.Bytes;
+                using SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(ImageSizeX, ImageSizeY), SKFilterQuality.High);               
+                
+                pixels = scaledBitmap.Bytes;
+                bytesPerPixel = scaledBitmap.BytesPerPixel;
             }
-
-            var bytesPerPixel = sourceBitmap.BytesPerPixel;
+            
+            //var bytesPerPixel = sourceBitmap.BytesPerPixel;
             var rowLength = ImageSizeX * bytesPerPixel;
             var channelLength = ImageSizeX * ImageSizeY;
             var channelData = new float[channelLength * 3];
@@ -123,25 +109,27 @@ namespace UnoOnnxSamples.Models
                     var rChannelIndex = channelDataIndex;
                     var gChannelIndex = channelDataIndex + channelLength;
                     var bChannelIndex = channelDataIndex + (channelLength * 2);
-
-                    channelData[rChannelIndex] = (pixelR / 255f - 0.485f) / 0.229f;
-                    channelData[gChannelIndex] = (pixelG / 255f - 0.456f) / 0.224f;
-                    channelData[bChannelIndex] = (pixelB / 255f - 0.406f) / 0.225f;
+                    
+                    channelData[rChannelIndex] = (255f - pixelR) / 255f;
+                    channelData[gChannelIndex] = (255f - pixelG) / 255f;
+                    channelData[bChannelIndex] = (255f - pixelB) / 255f;
 
                     channelDataIndex++;
                 }
             }
-
-            var input = new DenseTensor<byte>(pixels, new[] { DimBatchSize, 4, ImageSizeX, ImageSizeY });
-            //var input = new DenseTensor<float>(channelData, new[] { DimBatchSize, DimNumberOfChannels, ImageSizeX, ImageSizeY });
-
+            var floatArray = pixels.Select(x => Convert.ToSingle(x/255.0)).ToArray();
+            //var matrix = floatArray.ToTensor().Reshape(new[] { ImageSizeX, ImageSizeY });
+            var input = new DenseTensor<float>(floatArray, _session.InputMetadata[ModelInputName].Dimensions);
+            //var input = new DenseTensor<byte>(pixels, new[] { DimBatchSize, 4, ImageSizeX, ImageSizeY });
+            //var input = new DenseTensor<float>(channelData, new[] { DimBatchSize, 1, ImageSizeX, ImageSizeY });
+            var inputmetat = _session.InputMetadata;
             using var results = _session.Run(new List<NamedOnnxValue> { NamedOnnxValue.CreateFromTensor(ModelInputName, input) });
 
             var output = results.FirstOrDefault(i => i.Name == ModelOutputName);
 
             if (output == null)
                 return "Unknown";
-
+            
             var scores = output.AsTensor<float>().ToList();
             var highestScore = scores.Max();
             var highestScoreIndex = scores.IndexOf(highestScore);
