@@ -9,6 +9,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="3*"/>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="6*" />
+		</Grid.RowDefinitions>
 
-    </Grid>
+		<Image x:Name="BasicImage"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+			   Source="ms-appx:///Content/PyTorch/fishh.jpeg"/>
+
+		<Button x:Name="RunButton"
+				Grid.Row="1"
+				Content="Run Super Resolution Reconstruction"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Center"
+				Click="RunButton_Click"/>
+
+		<Image x:Name="ResultantImage"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"/>
+	</Grid>
 </Page>

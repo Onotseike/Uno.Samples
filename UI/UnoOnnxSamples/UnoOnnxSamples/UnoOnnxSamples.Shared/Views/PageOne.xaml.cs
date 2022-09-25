@@ -24,11 +24,7 @@ namespace UnoOnnxSamples.Views
         public PageOne()
         {
             this.InitializeComponent();
-            this._classifier = new MobileOnnxImgaeClassifier();
-            foreach (var item in EmbeddedResources)
-            {
-                Console.WriteLine(item);
-            }
+            this._classifier = new MobileOnnxImgaeClassifier();            
         }
 
         async Task RunInferenceAsync(string filename)

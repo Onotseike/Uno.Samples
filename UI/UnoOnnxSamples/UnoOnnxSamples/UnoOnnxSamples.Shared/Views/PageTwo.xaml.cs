@@ -20,9 +20,49 @@ namespace UnoOnnxSamples.Views
     /// </summary>
     public sealed partial class PageTwo : Page
     {
+        MobilePyTorchSuperResolution superResolution;
+        public string[] EmbeddedResources { get; } = typeof(MainPage).Assembly.GetManifestResourceNames();
+        
         public PageTwo()
         {
             this.InitializeComponent();
+            this.superResolution = new MobilePyTorchSuperResolution();
+            foreach (var item in EmbeddedResources)
+            {
+                Console.WriteLine(item);
+            }
         }
+        
+        async Task RunSuperResolutionAsync()
+        {
+            RunButton.IsEnabled = false;
+            try
+            {
+                var sampleImage = await superResolution.GetSampleImageAsync("fish.jpeg");
+                var result = await superResolution.GetSuperResolutionImage(sampleImage, "fish.jpeg");
+
+                var dialog = new ContentDialog();
+                dialog.Content = result;
+                dialog.CloseButtonText = "Done";
+
+                var dialogResult = await dialog.ShowAsync();
+
+            }
+            catch (Exception exception)
+            {
+
+                var dialog = new ContentDialog();
+                dialog.Content = $"ERROR:{exception.Message}";
+                dialog.CloseButtonText = "Done";
+
+                var dialogResult = await dialog.ShowAsync();
+            }
+            finally
+            {
+                RunButton.IsEnabled = true;
+            }
+        }
+
+        private async void RunButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => await RunSuperResolutionAsync();
     }
 }

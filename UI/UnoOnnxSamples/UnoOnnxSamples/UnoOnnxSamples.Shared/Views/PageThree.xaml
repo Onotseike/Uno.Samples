@@ -10,5 +10,21 @@
 
     <Grid>
 
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Image x:Name="BasicImage"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+			   Source="ms-appx:///Content/Tensorflow/handwritten.jpeg" />
+
+		<Button x:Name="RunButton"
+				Grid.Row="1"
+				Content="Run Hand Writing Detection"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Center"
+				Click="RunButton_Click" />
+	</Grid>
 </Page>

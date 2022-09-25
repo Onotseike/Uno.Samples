@@ -21,7 +21,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MNISTClassifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MobileOnnxImgaeClassifier.cs" />
+    <Compile Include="..\UnoOnnxSamples.Shared\Models\MobilePyTorchSuperResolution.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\PageFour.xaml.cs">
       <DependentUpon>PageFour.xaml</DependentUpon>
     </Compile>
@@ -58,9 +60,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\PyTorch\fishh.jpeg" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Tensorflow\handwrittenn.jpeg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Tensorflow\handwritten.jpeg" />
     <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\mobilenetv2-7-quantized.onnx" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\mobilenetv2-7.onnx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\PyTorch\super_resolution.onnx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Tensorflow\mnist_model.onnx" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
@@ -72,6 +78,7 @@
 		 without manipulating the projitem file.
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Content\Onnx\chicken.jpg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\PyTorch\fish.jpeg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\chickenn.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Content\Onnx\dogg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -101,6 +108,7 @@
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content\Keras\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
 </Project>

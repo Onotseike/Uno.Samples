@@ -208,6 +208,9 @@ namespace UnoOnnxSamples.Models
             sampleImageStream.CopyTo(sampleImageMemoryStream);
             _sampleImage = sampleImageMemoryStream.ToArray();
         }
+
+
+        
         #endregion
     }
 }

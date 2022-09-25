@@ -18,7 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <_Globbed_Compile Remove="Extensions\ImageResourceExtension.cs" />
+    <_Globbed_Compile Remove="Models\MNISTClassifier.cs" />
     <_Globbed_Compile Remove="Models\MobileOnnxImgaeClassifier.cs" />
+    <_Globbed_Compile Remove="Models\MobilePyTorchImageClassifier.cs" />
     <_Globbed_Compile Remove="Views\PageFour.xaml.cs" />
     <_Globbed_Compile Remove="Views\PageOne.xaml.cs" />
     <_Globbed_Compile Remove="Views\PageThree.xaml.cs" />

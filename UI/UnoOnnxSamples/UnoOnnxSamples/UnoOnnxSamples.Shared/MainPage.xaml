@@ -21,10 +21,10 @@
 			<NavigationViewItem Content="PyTorch"
 								Icon="Document"
 								Tag="PageTwo" />
-			<NavigationViewItem Content="Keras"
+			<NavigationViewItem Content="TF Lite"
 								Icon="Library"
 								Tag="PageThree" />
-			<NavigationViewItem Content="ML.NET"
+			<NavigationViewItem Content="Keras"
 								Icon="Link"
 								Tag="PageFour" />
 		</NavigationView.MenuItems>

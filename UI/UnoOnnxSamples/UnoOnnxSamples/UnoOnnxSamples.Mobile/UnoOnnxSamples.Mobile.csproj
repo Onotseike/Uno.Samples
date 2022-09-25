@@ -86,4 +86,7 @@
     </When>
   </Choose>
   <Import Project="..\UnoOnnxSamples.Shared\UnoOnnxSamples.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <_Globbed_Compile Remove="..\UnoOnnxSamples.Shared\Models\MobilePyTorchSuperResolution.cs" />
+  </ItemGroup>
 </Project>

@@ -20,9 +20,46 @@ namespace UnoOnnxSamples.Views
     /// </summary>
     public sealed partial class PageThree : Page
     {
+        MNISTClassifier _classifier;
+        public string[] EmbeddedResources { get; } = typeof(MainPage).Assembly.GetManifestResourceNames();
+
         public PageThree()
         {
             this.InitializeComponent();
+            this._classifier = new MNISTClassifier();
         }
+
+        async Task RunInferenceAsync()
+        {
+            RunButton.IsEnabled = false;
+            try
+            {
+                var sampleImage = await _classifier.GetSampleImageAsync();
+                var result = await _classifier.GetPredictionAsync(sampleImage);
+
+                var dialog = new ContentDialog();
+                dialog.Content = result;
+                dialog.CloseButtonText = "Done";
+
+                var dialogResult = await dialog.ShowAsync();
+
+            }
+            catch (Exception exception)
+            {
+
+                var dialog = new ContentDialog();
+                dialog.Content = $"ERROR:{exception.Message}";
+                dialog.CloseButtonText = "Done";
+
+                var dialogResult = await dialog.ShowAsync();
+            }
+            finally
+            {
+                RunButton.IsEnabled = true;
+            }
+        }
+
+        private async void RunButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => await RunInferenceAsync();
+
     }
 }
