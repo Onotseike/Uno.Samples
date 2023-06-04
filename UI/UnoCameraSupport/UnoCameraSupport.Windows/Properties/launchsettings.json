@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"UnoCameraSupport.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"UnoCameraSupport.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}

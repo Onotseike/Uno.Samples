@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "UnoCameraSupport",
+  "display": "standalone",
+  "name": "UnoCameraSupport",
+  "short_name": "UnoCameraSupport",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
