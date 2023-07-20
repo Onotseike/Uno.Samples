@@ -296,7 +296,9 @@ Demo of the usage of WebRTC in Uno WebAssembly. This sample establishes a direct
 
 [Browse source](https://github.com/unoplatform/Uno.Samples/tree/master/UI/XamlBasics/ListViewSample)
 
+### UnoZIndex : Overlaying elements
 
+[Browse source](https://github.com/unoplatform/Uno.Samples/tree/master/UI/UnoZIndex/UnoZIndex)
 =======
 
 Visit [our documentation](https://platform.uno/docs/articles/intro.html) for more details.
